@@ -20,12 +20,13 @@ contas = []
 def menu():
    menu = """
 
-    [d] Depositar
-    [s] Sacar
-    [e] Extrato
-    [nc] Nova conta
-    [nu] Novo cliente
-    [q] Sair
+    [1] Depositar
+    [2] Sacar
+    [3] Extrato
+    [4] Nova conta
+    [5] Novo cliente
+    [6] Listar clientes
+    [7] Sair
 
     => """ 
    return input(textwrap.dedent(menu))
@@ -70,7 +71,7 @@ def exibir_extrato(saldo,/,*,extrato):
     print(f"Saldo: R$ {saldo:.2f}")
     print("==========================================")
 
-def criar_usuario(usuarios):
+def criar_clientes(usuarios):
     cpf = input("Informe o CPF (somente números): ")
     usuario = filtrar_usuario(cpf, usuarios)
 
@@ -122,11 +123,11 @@ def main():
     while True:
         opcao = menu()
 
-        if opcao == "d":
+        if opcao == "1":
             valor = float(input("Informe o valor do depósito: "))
             saldo, extrato = depositar(saldo, valor, extrato)
 
-        elif opcao == "s":
+        elif opcao == "2":
             valor = float(input("Informe o valor do saque: "))
 
             saldo, extrato = sacar(
@@ -139,23 +140,23 @@ def main():
             )
             
 
-        elif opcao == "e":
+        elif opcao == "3":
             exibir_extrato(saldo, extrato=extrato)
         
-        elif opcao =="nu":
-            criar_usuario(usuarios)
+        elif opcao =="4":
+            criar_clientes(usuarios)
         
-        elif opcao == "nc":
+        elif opcao == "5":
             numero_conta = len(contas) + 1
             conta = criar_conta(AGENCIA, numero_conta, usuarios)
 
             if conta:
                 contas.append(conta)
 
-        elif opcao == "q":
+        elif opcao == "7":
             break
         
-        elif opcao =="lc":
+        elif opcao =="6":
             listar_contas(contas)
 
         else:
